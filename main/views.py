@@ -10,3 +10,7 @@ def home(request):
         'travels': Trip.objects.all()
     }
     return render(request, 'home.html', context=home_context)
+
+def detail(request, trip_id):
+    trip = Trip.objects.get(id=trip_id)
+    return render(request, 'detail.html', {'trip': trip})
