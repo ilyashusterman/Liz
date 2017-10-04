@@ -40,7 +40,7 @@
 			</nav>
 
 			<div class="fh5co-footer">
-				<p><small>&copy; 2017 ilya shusterman & liza shusterman. All Rights Reserved.</span>
+				<p><small>&copy; 2017 ilya shusterman & liza shusterman. All Rights Reserved.
                     <span>Designed by <a href="https://paycoinmarkets.com" target="_blank">liza shusterman</a> </span> </small></p>
 			</div>
 
@@ -48,7 +48,9 @@
 </div>
 <h1>Liza App</h1>
 {% for travel in travels %}
+    <a href="/{{travel.id}}/">
 <h1>{{travel.stops}}</h1>
+    </a>
 {% endfor %}
 </body>
 </html>
