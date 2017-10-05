@@ -25,10 +25,5 @@ def detail(request, trip_id):
 def add_trip(request):
     form = TripForm(request.POST)
     if form.is_valid():
-        trip = Trip(name=form.cleaned_data['name'],
-                    destination=form.cleaned_data['destination'],
-                    stops=form.cleaned_data['stops'],
-                    img_url=form.cleaned_data['img_url'],
-                    )
-        trip.save()
+        form.save(commit=True)
     return HttpResponseRedirect('/')

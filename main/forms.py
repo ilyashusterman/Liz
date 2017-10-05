@@ -1,8 +1,8 @@
 from django import forms
+from .models import Trip
 
 
-class TripForm(forms.Form):
-    name = forms.CharField(label='Name', max_length=100)
-    destination = forms.CharField(label='Destination', max_length=100)
-    stops = forms.CharField(label='Stops', max_length=100)
-    img_url = forms.CharField(label='Image Url', max_length=100)
+class TripForm(forms.ModelForm):
+    class Meta:
+        model = Trip
+        fields = ['name', 'destination', 'stops', 'img_url']
