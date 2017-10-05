@@ -19,4 +19,5 @@ from . import views
 urlpatterns = [
     url(r'^$', views.home),
     url(r'^([0-9]+)/$', views.detail, name='detail'),
+    url(r'^add_trip/$', views.add_trip, name='add_trip'),
 ]

@@ -3,11 +3,23 @@
 {% load staticfiles %}
 
 {% block content %}
+
 <h1>Liza App</h1>
 {% for travel in travels %}
     <a href="/{{travel.id}}/">
 <h1>{{travel.stops}}</h1>
     </a>
 {% endfor %}
+
+
+
+    <form action='add_trip/' method='post'>
+{% csrf_token %}
+{{ form.as_p }}
+<input type='submit' value='Submit' />
+</form>
+
+
+
 {% endblock %}
 
