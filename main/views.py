@@ -71,7 +71,7 @@ def logout_view(request):
 
 
 def like_trip(request):
-    trip_id = request.GET.get('trip_id', None)
+    trip_id = request.POST.get('trip_id', None)
     likes = 0
     if trip_id:
         trip = Trip.objects.get(id=int(trip_id))
