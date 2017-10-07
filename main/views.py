@@ -23,7 +23,7 @@ def detail(request, trip_id):
 
 
 def add_trip(request):
-    form = TripForm(request.POST)
+    form = TripForm(request.POST, request.FILES)
     if form.is_valid():
         form.save(commit=True)
     return HttpResponseRedirect('/')

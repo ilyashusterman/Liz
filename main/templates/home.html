@@ -8,12 +8,13 @@
 {% for travel in travels %}
     <a href="/{{travel.id}}/">
 <h1>{{travel.stops}}</h1>
+    <img src='{{travel.image.url}}' />
     </a>
 {% endfor %}
 
 
 
-    <form action='add_trip/' method='post'>
+    <form enctype='multipart/form-data' action='add_trip/' method='post'>
 {% csrf_token %}
 {{ form.as_p }}
 <input type='submit' value='Submit' />
