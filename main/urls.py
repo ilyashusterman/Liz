@@ -8,6 +8,8 @@ urlpatterns = [
     url(r'^([0-9]+)/$', views.detail, name='detail'),
     url(r'^add_trip/$', views.add_trip, name='add_trip'),
     url(r'^user/(\w+)/$', views.profile, name='profile'),
+    url(r'^login/$', views.login_view, name='login'),
+    url(r'^logout/$', views.logout_view, name='logout'),
 ]
 
 if settings.DEBUG:

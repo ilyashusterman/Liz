@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.db.models import ObjectDoesNotExist
-from .forms import TripForm
+from .forms import TripForm, LoginForm
 from .models import Trip
 
 
@@ -42,3 +43,28 @@ def profile(request, username):
                                                 })
     except ObjectDoesNotExist as e:
         return render(request, '404.html')
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/')
+                else:
+                    print('User is not Active')
+            else:
+                print('Incorrect username and password')
+    else:
+        form = LoginForm()
+        return render(request, 'login.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
