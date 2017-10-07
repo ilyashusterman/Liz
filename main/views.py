@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.db.models import ObjectDoesNotExist
 from .forms import TripForm, LoginForm
@@ -68,3 +68,15 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+def like_trip(request):
+    trip_id = request.GET.get('trip_id', None)
+    likes = 0
+    if trip_id:
+        trip = Trip.objects.get(id=int(trip_id))
+        if trip is not None:
+            likes = trip.likes +1
+            trip.likes = likes
+            trip.save()
+    return HttpResponse(likes)

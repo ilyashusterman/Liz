@@ -13,7 +13,13 @@
     by: {{  travel.user.username }}
     </a>
     <img src='{{travel.image.url}}' />
-
+    <button id='likes' data-id='{{ travel.id }}' type='button'>
+    {% if travel.likes > 0 %}
+        {{ travel.likes }}
+    {% else %}
+       {{ 'like' }}
+    {% endif %}
+    </button>
 {% endfor %}
 
 

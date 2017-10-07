@@ -179,3 +179,16 @@
 
 
 }());
+
+$('button').on('click', function (event) {
+	event.preventDefault();
+	var element = $(this);
+	$.ajax({
+		url: '/like_trip/',
+		type: 'GET',
+		data: {trip_id: element.attr('data-id')},
+		success: function (response) {
+			element.html(' '+ response);
+        }
+	})
+});
