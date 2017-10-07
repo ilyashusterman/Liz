@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.db.models import ObjectDoesNotExist
@@ -29,3 +30,15 @@ def add_trip(request):
         trip.user = request.user
         trip.save()
     return HttpResponseRedirect('/')
+
+
+def profile(request, username):
+    try:
+        user = User.objects.get(username=username)
+        trips = Trip.objects.filter(user=user)
+        return render(request, 'profile.html', {'travels': trips,
+                                                'username': username,
+                                                'form': TripForm()
+                                                })
+    except ObjectDoesNotExist as e:
+        return render(request, '404.html')

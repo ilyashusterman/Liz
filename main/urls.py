@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^$', views.home),
     url(r'^([0-9]+)/$', views.detail, name='detail'),
     url(r'^add_trip/$', views.add_trip, name='add_trip'),
+    url(r'^user/(\w+)/$', views.profile, name='profile'),
 ]
 
 if settings.DEBUG:

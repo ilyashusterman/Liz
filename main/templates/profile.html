@@ -4,16 +4,12 @@
 
 {% block content %}
 
-<h1>Liza App</h1>
+<h1>Hello {{ username }} </h1>
 {% for travel in travels %}
     <a href="/{{travel.id}}/">
 <h1>{{travel.stops}}</h1>
-       </a>
-    <a href='/user/{{ travel.user.username }}'>
-    by: {{  travel.user.username }}
-    </a>
     <img src='{{travel.image.url}}' />
-
+    </a>
 {% endfor %}
 
 
