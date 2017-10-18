@@ -31,7 +31,7 @@ SECRET_KEY = 'ly%pvnoab(c4evomv6m^(5u@3av@904lhj-*=z)5j4l_#4f!5)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['liza-application.herokuapp.com']
+ALLOWED_HOSTS = ['liza-application.herokuapp.com', 'localhost']
 
 
 # Application definition
