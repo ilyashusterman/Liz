@@ -3,32 +3,44 @@
 {% load staticfiles %}
 
 {% block content %}
+			<div class="fh5co-narrow-content">
+				<h2 class="fh5co-heading " >Liza Application <span>See more Travels</span></h2>
+				<div class="row ">
+                    {% for travel in travels %}
+					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                     <a href="/{{travel.id}}/">
+							<img src='{{travel.image.url}}' alt="Travel Trip" class="img-responsive">
+                     </a>
+							<h3 class="fh5co-work-title">Travel stops: {{travel.stops}}</h3>
+							    <button id='likes' data-id='{{ travel.id }}' type='button'>
+                                {% if travel.likes > 0 %}
+                                    {{ travel.likes }}
+                                {% else %}
+                                   {{ 'like' }}
+                                {% endif %}
+                                </button>
+						    <a href='/user/{{ travel.user.username }}'>
+                            by: {{  travel.user.username }}
+                            </a>
+					</div>
+					<div class="clearfix visible-md-block"></div>
+                   {% endfor %}
+	        </div>
+			</div>
 
-<h1>Liza App</h1>
-{% for travel in travels %}
-    <a href="/{{travel.id}}/">
-<h1>{{travel.stops}}</h1>
-       </a>
-    <a href='/user/{{ travel.user.username }}'>
-    by: {{  travel.user.username }}
-    </a>
-    <img src='{{travel.image.url}}' />
-    <button id='likes' data-id='{{ travel.id }}' type='button'>
-    {% if travel.likes > 0 %}
-        {{ travel.likes }}
-    {% else %}
-       {{ 'like' }}
-    {% endif %}
-    </button>
-{% endfor %}
 
-
-
+	<div class="fh5co-narrow-content">
+    <div class="row">
+					<div class="col-md-4 " data-animate-effect="fadeInLeft">
+    	<h1 class="fh5co-heading-colored">Create new Future Travel</h1>
     <form enctype='multipart/form-data' action='add_trip/' method='post'>
 {% csrf_token %}
 {{ form.as_p }}
 <input type='submit' value='Submit' />
 </form>
+					</div>
+				</div>
+			</div>
 
 
 

@@ -32,16 +32,15 @@
 
 			<nav id="fh5co-main-menu" role="navigation">
                 {% if user.is_authenticated %}
-                    <a href='{% url 'profile' user.username %}'>{{ user.username }}</a>
-                      <a href='{% url 'logout' %}'>logout</a>
+                    <a href='{% url 'profile' user.username %}'><h3 class="fh5co-work-title">{{ user.username }}</h3></a>
+                    <a href='{% url 'logout' %}'><h3 class="fh5co-heading-colored btn-warning">logout</h3></a>
                 {% else %}
-                    <a href='{% url 'login' %}'>login</a>
+                    <a href='{% url 'login' %}'><h3 class=" fh5co-heading-colored btn-success">login</h3></a>
                 {% endif %}
 				<ul>
-					<li class="fh5co-active"><a href="index.html">Travels</a></li>
-					<li><a href="portfolio.html">Portfolio</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="contact.html">Contact</a></li>
+					<li class="fh5co-active"><a href="/">Travels</a></li>
+					<li><a href="/">Best Sales</a></li>
+					<li><a href="/">Vegan news</a></li>
 				</ul>
 			</nav>
 
