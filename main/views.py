@@ -76,9 +76,11 @@ def login_view(request):
                     login(request, user)
                     return HttpResponseRedirect('/')
                 else:
-                    print('User is not Active')
+                    message = 'User is not Active'
+                    return render(request, '404.html', {'message': message})
             else:
-                print('Incorrect username and password')
+                message = 'Incorrect username and password'
+                return render(request, '404.html', {'message': message})
     else:
         form = LoginForm()
         return render(request, 'login.html', {'form': form})
