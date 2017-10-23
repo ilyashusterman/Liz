@@ -99,3 +99,7 @@ def like_trip(request):
             trip.likes = likes
             trip.save()
     return HttpResponse(likes)
+
+
+def sales(request):
+    return render(request, 'sales.html', {'sales': {}})

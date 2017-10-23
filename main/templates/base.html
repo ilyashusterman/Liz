@@ -38,7 +38,7 @@
                 {% endif %}
 				<ul>
 					<li class="fh5co-active"><a href="/">Travels</a></li>
-					<li><a href="/">Best Sales</a></li>
+					<li><a href='{% url 'sales' %}'>Best Sales</a></li>
 					<li><a href="/">Vegan news</a></li>
 				</ul>
 			</nav>
@@ -51,6 +51,7 @@
 		</aside>
 
     <div id="fh5co-main">
+    <h2 class='fh5co-heading ' >Liza Application </h2>
         {% block content %}
         {% endblock %}
     </div>

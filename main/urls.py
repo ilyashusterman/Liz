@@ -10,7 +10,8 @@ urlpatterns = [
     url(r'^user/(\w+)/$', views.profile, name='profile'),
     url(r'^login/$', views.login_view, name='login'),
     url(r'^logout/$', views.logout_view, name='logout'),
-    url(r'^like_trip/$', views.like_trip, name='like_trip')
+    url(r'^like_trip/$', views.like_trip, name='like_trip'),
+    url(r'^sales/$', views.sales, name='sales'),
 ]
 
 if settings.DEBUG:
