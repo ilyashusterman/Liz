@@ -1,17 +1,22 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
+from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.db.models import ObjectDoesNotExist
-from .forms import TripForm, LoginForm
-from .models import Trip
+from .forms import TripForm, LoginForm, ImageForm
+from .models import Trip, TripImage
 
 
 def home(request):
+    ImageFormSet = modelformset_factory(TripImage,
+                                        form=ImageForm, extra=3)
     home_context = {
         'travel': ['Sweden', 'England'],
         'travels': Trip.objects.all(),
-        'form': TripForm()
+        'form': TripForm(),
+        'formset': ImageFormSet(queryset=TripImage.objects.none()),
+        'images': TripImage.objects.all()
     }
     return render(request, 'home.html', context=home_context)
 
@@ -25,11 +30,25 @@ def detail(request, trip_id):
 
 
 def add_trip(request):
-    form = TripForm(request.POST, request.FILES)
-    if form.is_valid():
+    ImageFormSet = modelformset_factory(TripImage,
+                                        form=ImageForm, extra=3)
+    # form = TripForm(request.POST, request.FILES)
+    form = TripForm(request.POST)
+    formset = ImageFormSet(request.POST, request.FILES,
+                           queryset=TripImage.objects.none())
+    # trip = None
+    if form.is_valid() and formset.is_valid():
+        print(form)
         trip = form.save(commit=False)
         trip.user = request.user
         trip.save()
+        # if trip is not None:
+        for form_image in formset.cleaned_data:
+            if 'image' in form_image:
+                image = form_image['image']
+                photo = TripImage(trip=trip, image=image)
+                photo.save()
+
     return HttpResponseRedirect('/')
 
 
@@ -76,7 +95,7 @@ def like_trip(request):
     if trip_id:
         trip = Trip.objects.get(id=int(trip_id))
         if trip is not None:
-            likes = trip.likes +1
+            likes = trip.likes + 1
             trip.likes = likes
             trip.save()
     return HttpResponse(likes)

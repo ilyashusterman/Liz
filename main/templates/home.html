@@ -8,9 +8,19 @@
 				<div class="row ">
                     {% for travel in travels %}
 					<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12">
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                     <div class="carousel-inner">
+                    {% for image in images %}
+                        {% if image.trip_id == travel.id %}
+                    <div class="carousel-item">
                      <a href="/{{travel.id}}/">
-							<img src='{{travel.image.url}}' alt="Travel Trip" class="img-responsive">
+							<img src='{{image.image.url}}' alt="Travel Trip" class="img-responsive d-block">
                      </a>
+                    </div>
+                        {% endif %}
+                        {% endfor %}
+                     </div>
+                    </div>
 							<h3 class="fh5co-work-title">Travel stops: {{travel.stops}}</h3>
 							    <button id='likes' data-id='{{ travel.id }}' type='button'>
                                 {% if travel.likes > 0 %}
@@ -36,6 +46,10 @@
     <form enctype='multipart/form-data' action='add_trip/' method='post'>
 {% csrf_token %}
 {{ form.as_p }}
+           {{ formset.management_form }}
+    {% for form in formset %}
+        {{ form }}
+    {% endfor %}
 <input type='submit' value='Submit' />
 </form>
 					</div>
